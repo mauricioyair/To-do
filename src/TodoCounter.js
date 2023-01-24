@@ -5,9 +5,9 @@ const estilos = {
   fontWeight: "300",
 }
 
-function TodoCounter() {
+function TodoCounter({ total, completed }) {
   return(
-    <h2 style={ estilos }>Has Completado <strong>2</strong> de <strong>4</strong> Todos</h2>
+    <h2 style={ estilos }>Has Completado <strong>{completed}</strong> de <strong>{total}</strong> To-dos</h2>
   )
 }
 
