@@ -6,8 +6,36 @@ import { TodoItem } from './TodoItem';
 import { CreateTodoButton } from './CreateTodoButton';
 
 
+//Custom Hooks
+function useLocalStorage(itemName, initialValue) {
 
-const defaultTodos = [
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItem;
+  
+  if(!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = [];
+  } else {
+    parsedItem = JSON.parse(localStorageItem);
+  }
+
+  const [item, setItem] = useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    const stringifiedItem = JSON.stringify(newItem);
+    localStorage.setItem(itemName, stringifiedItem);
+    setItem(newItem);
+  }
+
+  return [
+    item,
+    saveItem,
+  ];
+
+}
+
+
+/* const defaultTodos = [
   {
     id: 1,
     text: 'Ver el curso de Javascript',
@@ -29,13 +57,12 @@ const defaultTodos = [
     completed: false,
   },
   
-]
+] */
 
 
 function App() {
 
-
-  const [todos, setTodos] = useState(defaultTodos);
+  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
   const [searchValue, setStateValue] = useState('');
 
   //Contar cuantos todos estan completados
@@ -56,11 +83,13 @@ function App() {
   }
 
 
+
+
   const completeTodo = (text) => {
     const todoIndex = todos.findIndex(todo => todo.text === text);
     const newTodos = [...todos];
     newTodos[todoIndex].completed = true;
-    setTodos(newTodos);
+    saveTodos(newTodos);
     /* newTodos[todoIndex] = {
       text: todos[todoIndex].text,
       completed: true,
@@ -71,7 +100,7 @@ function App() {
     const todoIndex = todos.findIndex(todo => todo.text === text);
     const newTodos = [...todos];
     newTodos.splice(todoIndex, 1);
-    setTodos(newTodos);
+    saveTodos(newTodos);
     /* newTodos[todoIndex] = {
       text: todos[todoIndex].text,
       completed: true,
