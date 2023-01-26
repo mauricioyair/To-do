@@ -1,10 +1,10 @@
 import React from "react";
 
-function TodoSearch({ searchValue, setStateValue }) {
+function TodoSearch({ searchValue, setSearchValue }) {
 
   const onSearchValueChanged = (event) => {   
     console.log(event.target.value) 
-    setStateValue(event.target.value)
+    setSearchValue(event.target.value)
   }
 
   return(

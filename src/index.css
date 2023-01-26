@@ -9,10 +9,11 @@ html {
 body {
   margin: 0;
   font-family: "Roboto Mono";
-    background: #222222;
+  background: #222222;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: auto;
+  color: #aaa;
 }
 
 code {
