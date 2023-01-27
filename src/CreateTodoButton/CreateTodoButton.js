@@ -2,14 +2,14 @@ import React from "react";
 import { Plus } from 'iconoir-react';
 import './CreateTodoButton.css';
 
-function CreateTodoButton() {
+function CreateTodoButton( {setOpenModal} ) {
 
-  const onClickButton = (msg) => {
-    console.log(msg);
+  const onClickButton = () => {
+    setOpenModal(prevState => !prevState);
   }
   
   return(
-      <button className="CreateTodoButton" onClick={ () => onClickButton('Click')}>
+      <button className="CreateTodoButton" onClick={ onClickButton }>
         <Plus/>
       </button>
   )
