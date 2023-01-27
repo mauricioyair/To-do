@@ -7,7 +7,7 @@ import { CreateTodoButton } from '../CreateTodoButton/CreateTodoButton';
 
 import { TodoContext } from '../TodoContext';
 import { Modal } from '../Modal';
-
+import { TodoForm } from '../TodoForm';
 
 function AppUI() {
   const { error, loading, searchedTodos, completeTodo, deleteTodo, openModal, setOpenModal } = useContext(TodoContext);
@@ -28,7 +28,7 @@ function AppUI() {
 
         {searchedTodos.map(todo => (
           <TodoItem 
-            key={todo.id} 
+            key={todo.text} 
             text={todo.text} 
             completed={todo.completed}
             onComplete={() => completeTodo(todo.text)}
@@ -39,7 +39,7 @@ function AppUI() {
     
       {!!openModal && (
         <Modal>
-          <p></p>
+          <TodoForm />          
         </Modal>
       )}
   
